@@ -14,6 +14,9 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { CreateUser } from "@/services/api/user";
+
+
 
 const formSchema = z.object({
     username: z
@@ -45,10 +48,23 @@ export default function RegisterForm() {
             confirmPassword: "",
         },
     });
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
+
+        try {
+            const newUser = await CreateUser({
+             name: values.username,
+                email: values.email,
+                password: values.password
+            });
+
+
+            console.log(newUser);
+            console.log("success post user nextjs");
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     return (

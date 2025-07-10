@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import LenisProvider from '@/components/LenisProvider'
 import "./globals.css";
+
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -28,7 +30,7 @@ export default function RootLayout({
             lang="en"
             suppressHydrationWarning
         >
-            <body
+            <body suppressHydrationWarning
                 className={`${geistSans.variable} ${geistMono.variable} antialiased `}
             >
                 <ThemeProvider
@@ -37,7 +39,9 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    {children}
+                    <LenisProvider>
+                        {children}
+                    </LenisProvider>
                 </ThemeProvider>
             </body>
         </html>

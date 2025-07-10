@@ -3,7 +3,7 @@ import { ModeToggle } from "@/components/ui/toggle.theme";
 import Link from "next/link";
 export default function HeaderDefault() {
     return (
-        <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
+        <div className="flex justify-between items-center p-4 bg-gray-500 text-white dark:bg-red-400">
             <h1>Logo</h1>
             <ul className="flex space-x-4">
                 <li>

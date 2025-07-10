@@ -126,3 +126,7 @@
         @apply overflow-hidden text-ellipsis whitespace-nowrap;
     }
 }
+
+html {
+  scroll-behavior: smooth;
+}

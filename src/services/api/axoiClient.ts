@@ -1,20 +1,11 @@
 import axios from 'axios';
 import https from 'https';
-import fs from 'fs';
-import path from 'path';
-import serverAddress from '../serverAddress';
+import envConfig from "@/config/envConfig"
 
-// Truy cập cert từ root dự án (dù đang ở src/ sâu trong)
-const certPath = path.resolve(process.cwd(), 'cert', 'cert.pem');
-const keyPath = path.resolve(process.cwd(), 'cert', 'key.pem');
+// const isServer = typeof window === 'undefined';
 
-
-const server = serverAddress();
+const server = envConfig.NEXT_PUBLIC_SERVER_ADDRESS;
 export const axiosInstance = axios.create({
   baseURL: server,
-  httpsAgent: new https.Agent({
-    ca: fs.readFileSync(certPath),
-    rejectUnauthorized: false, // vẫn an toàn vì tin đúng cert
-  }),
-  timeout: 6000,
+  timeout: 10000,
 });

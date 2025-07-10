@@ -18,13 +18,12 @@ import { Input } from "@/components/ui/input";
 const formSchema = z.object({
     email: z
         .string()
-        .email({ message: "Invalid email address" })
-        .min(1, { message: "Email is required" })
-        .max(100, { message: "Email must be less than 100 characters" }),
+        .email({ message: "Email không hợp lệ!" })
+        .min(3, { message: "Vui lòng nhập email!" }),
     password: z
         .string()
-        .min(8, { message: "Password must be at least 8 characters" })
-        .max(100, { message: "Password must be less than 100 characters" }),
+        .min(4, { message: "Mật khẩu phải chứa ít nhất 4 ký tự" })
+        .max(100, { message: "Mật khẩu tối đa 100 ký tự" }),
 });
 
 export default function LoginForm() {
@@ -35,10 +34,11 @@ export default function LoginForm() {
             password: "",
         },
     });
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values);
+
     }
 
     return (
@@ -46,6 +46,7 @@ export default function LoginForm() {
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6 w-full mx-auto"
+            // noValidate // nó có nghĩa là không dùng chức năng validate của nextjs và tự cấu hình bằng js hoặc ts
             >
                 <FormField
                     control={form.control}
@@ -55,6 +56,7 @@ export default function LoginForm() {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
+                                className="shadow-sm shadow-black/70"
                                     placeholder="Nhập email"
                                     type="email"
                                     {...field}
@@ -72,6 +74,7 @@ export default function LoginForm() {
                             <FormLabel>Mât khẩu</FormLabel>
                             <FormControl>
                                 <Input
+                                className="shadow-sm shadow-black/70"
                                     placeholder="Nhập mât khẩu"
                                     type="password"
                                     {...field}
@@ -82,7 +85,7 @@ export default function LoginForm() {
                     )}
                 />
 
-                <Button type="submit">Đăng ký</Button>
+                <Button type="submit" className="w-full">Đăng nhập</Button>
             </form>
         </Form>
     );
